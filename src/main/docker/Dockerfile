@@ -1,6 +1,4 @@
 FROM java:8
-ARG CONT_IMG
-ENV CONT_IMG registration
 VOLUME /tmp
 
 #RUN curl -o app.jar http://10.63.39.117:8081/artifactory/libs-release-local/org/springframework/samples/service/service/microservice-demo/1.1.0.RELEASE/microservice-demo-1.1.0.RELEASE.jar
