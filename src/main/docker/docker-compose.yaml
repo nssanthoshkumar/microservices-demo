@@ -1,0 +1,21 @@
+version: '2'
+services:
+  registration:
+    build: .
+    ports:
+     - "1111:1111"
+    image: emcdevops/registration:1.0
+  accounts:
+    build: .
+    ports:
+     - "2222:2222"
+    image: emcdevops/accounts:1.0
+    depends_on:
+     - registration
+  web:
+    build: .
+    ports:
+     - "3333:3333"
+    image: emcdevops/web:1.0
+    depends_on:
+     - registration
