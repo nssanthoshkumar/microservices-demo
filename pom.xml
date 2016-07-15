@@ -95,6 +95,27 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>com.lazerycode.jmeter</groupId>
+				<artifactId>jmeter-maven-plugin</artifactId>
+				<version>1.10.1</version>
+				 <executions>
+					<execution>
+						 <id>jmeter-tests</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>jmeter</goal> 
+						</goals> 
+						<configuration>
+						        <ignoreResultFailures>true</ignoreResultFailures>
+                                <testResultsTimestamp>false</testResultsTimestamp>
+                                <overrideRootLogLevel>DEBUG</overrideRootLogLevel>
+                                <suppressJMeterOutput>false</suppressJMeterOutput>
+                                <jmeterLogLevel>DEBUG</jmeterLogLevel>
+                            </configuration>
+					</execution>
+				</executions> 
+			</plugin> 
 		</plugins>
 	</build>
 </project>
