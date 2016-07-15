@@ -54,9 +54,9 @@ public class AccountsConfiguration {
 		
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/testdb");
+		dataSource.setUrl("jdbc:mysql://mysql:3306/testdb");
 		dataSource.setUsername("root");
-		dataSource.setPassword("root");
+		dataSource.setPassword("password");
 		
 
 		logger.info("dataSource = " + dataSource);
