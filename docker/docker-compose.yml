@@ -5,6 +5,8 @@ services:
     ports:
      - "1111:1111"
     image: emcdevops/registration:1.0
+    links:
+     - mysql
   accounts:
     build: .
     ports:
@@ -12,6 +14,8 @@ services:
     image: emcdevops/accounts:1.0
     depends_on:
      - registration
+    links:
+     - mysql
   web:
     build: .
     ports:
@@ -19,3 +23,11 @@ services:
     image: emcdevops/web:1.0
     depends_on:
      - registration
+ mysql:
+   image: mysql:latest
+   environment:
+     MYSQL_ROOT_PASSWORD: password
+   ports:
+     - 3307:3306
+   volumes:
+     - ./db-dump:/docker-entrypoint-initdb.d
