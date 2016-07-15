@@ -3,6 +3,7 @@ package io.pivotal.microservices.services.registration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
+import org.springframework.context.annotation.PropertySource;
 
 /**
  * All you need to run a Eureka registration server.
