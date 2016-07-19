@@ -56,6 +56,7 @@ public class AccountsConfiguration {
 		
 
 		logger.info("dataSource = " + dataSource);
+		logger.info("conected mysql container");
 
 		// Sanity check
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
