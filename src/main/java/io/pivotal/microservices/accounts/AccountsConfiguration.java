@@ -50,12 +50,13 @@ public class AccountsConfiguration {
 		
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://mysql:3306/testdb");
+		dataSource.setUrl("jdbc:mysql://10.63.39.49:3306/testdb");
 		dataSource.setUsername("root");
 		dataSource.setPassword("password");
 		
 
 		logger.info("dataSource = " + dataSource);
+		logger.info("conected mysql container");
 
 		// Sanity check
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
