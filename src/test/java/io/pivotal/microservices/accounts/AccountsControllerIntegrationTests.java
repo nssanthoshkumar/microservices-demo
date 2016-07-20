@@ -18,7 +18,7 @@ import io.pivotal.microservices.services.accounts.AccountsServer;
  *
  */
 @SpringBootApplication
-@Import(AccountsConfiguration.class)
+@Import(AccountsTestConfiguration.class)
 class AccountsMain {
 	public static void main(String[] args) {
 		// Tell server to look for accounts-server.properties or
