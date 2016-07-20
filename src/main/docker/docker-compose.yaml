@@ -1,33 +1,29 @@
 version: '2'
 services:
+  mysql:
+   image: mysql:latest
+   environment:
+     MYSQL_ROOT_PASSWORD: password
+   ports:
+     - 3306:3306
+   volumes:
+     - ./db-dump:/docker-entrypoint-initdb.d
   registration:
-    build: .
     ports:
      - "1111:1111"
     image: emcdevops/registration:1.0
-    links:
-     - mysql
   accounts:
-    build: .
     ports:
      - "2222:2222"
     image: emcdevops/accounts:1.0
     depends_on:
      - registration
+     - mysql
     links:
      - mysql
   web:
-    build: .
     ports:
      - "3333:3333"
     image: emcdevops/web:1.0
     depends_on:
      - registration
- mysql:
-   image: mysql:latest
-   environment:
-     MYSQL_ROOT_PASSWORD: password
-   ports:
-     - 3307:3306
-   volumes:
-     - ./db-dump:/docker-entrypoint-initdb.d
