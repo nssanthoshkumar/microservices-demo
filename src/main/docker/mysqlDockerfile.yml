@@ -1,5 +1,5 @@
 mysql:
-   image: mysql:latest
+   image: mysql:db
    environment:
      MYSQL_ROOT_PASSWORD: password
    ports:
