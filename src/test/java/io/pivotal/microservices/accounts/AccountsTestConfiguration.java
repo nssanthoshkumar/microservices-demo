@@ -44,13 +44,15 @@ public class AccountsTestConfiguration {
 		
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://mysql:3306/testdb");
+		dataSource.setUrl("jdbc:mysql://10.63.39.49:3307/testdb");
 		dataSource.setUsername("root");
 		dataSource.setPassword("password");
 		
 
 		logger.info("dataSource = " + dataSource);
-		logger.info("conected mysql container");
+		logger.info("url = "+ dataSource.getUrl());
+        logger.info("username = "+ dataSource.getUsername());
+        logger.info("password = "+dataSource.getPassword());
 
 		// Sanity check
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
