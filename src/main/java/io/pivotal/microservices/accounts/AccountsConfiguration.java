@@ -25,7 +25,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 @ComponentScan
 @EntityScan("io.pivotal.microservices.accounts")
 @EnableJpaRepositories("io.pivotal.microservices.accounts")
-//@PropertySource("classpath:db-config.properties")
+// @PropertySource("classpath:db-config.properties")
 public class AccountsConfiguration {
 
 	protected Logger logger;
@@ -44,19 +44,22 @@ public class AccountsConfiguration {
 
 		// Create an in-memory H2 relational database containing some demo
 		// accounts.
-/*		DataSource dataSource = (new EmbeddedDatabaseBuilder()).addScript("classpath:testdb/schema.sql")
-				.addScript("classpath:testdb/data.sql").build();*/
-		
-		
+		/*
+		 * DataSource dataSource = (new
+		 * EmbeddedDatabaseBuilder()).addScript("classpath:testdb/schema.sql")
+		 * .addScript("classpath:testdb/data.sql").build();
+		 */
+
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://10.63.39.49:3306/testdb");
+		dataSource.setUrl("jdbc:mysql://10.63.39.49:3307/testdb");
 		dataSource.setUsername("root");
 		dataSource.setPassword("password");
-		
 
 		logger.info("dataSource = " + dataSource);
-		logger.info("conected mysql container");
+		logger.info("url = "+ dataSource.getUrl());
+        logger.info("username = "+ dataSource.getUsername());
+        logger.info("password = "+dataSource.getPassword());
 
 		// Sanity check
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
