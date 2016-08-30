@@ -22,6 +22,7 @@
 			<!-- Setup Spring Boot -->
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
+			<version>1.4.0.RELEASE</version>
 		</dependency>
 
 		<dependency>
@@ -48,14 +49,20 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+		</dependency>
+
+		<dependency>
 			<!-- Setup Spring Data JPA Repository support -->
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
-		<dependency> <!-- In-memory database for testing/demos  -->
-		<groupId>org.hsqldb</groupId> 
-			<artifactId>hsqldb</artifactId> </dependency>
+		<dependency> <!-- In-memory database for testing/demos -->
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+		</dependency>
 
 		<dependency>
 			<!-- Spring Cloud starter -->
@@ -80,6 +87,18 @@
 			<version>1.4</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.jayway.restassured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<version>2.4.0</version>
+		</dependency>
+
+	<dependency>
+		<groupId>org.testinfected.hamcrest-matchers</groupId>
+		<artifactId>spring-matchers</artifactId>
+		<version>1.5</version>
+	</dependency>
+
 	</dependencies>
 
 	<build>
@@ -99,23 +118,23 @@
 				<groupId>com.lazerycode.jmeter</groupId>
 				<artifactId>jmeter-maven-plugin</artifactId>
 				<version>1.10.1</version>
-				 <executions>
+				<executions>
 					<execution>
-						 <id>jmeter-tests</id>
+						<id>jmeter-tests</id>
 						<phase>verify</phase>
 						<goals>
-							<goal>jmeter</goal> 
-						</goals> 
+							<goal>jmeter</goal>
+						</goals>
 						<configuration>
-						        <ignoreResultFailures>true</ignoreResultFailures>
-                                <testResultsTimestamp>false</testResultsTimestamp>
-                                <overrideRootLogLevel>DEBUG</overrideRootLogLevel>
-                                <suppressJMeterOutput>false</suppressJMeterOutput>
-                                <jmeterLogLevel>DEBUG</jmeterLogLevel>
-                            </configuration>
+							<ignoreResultFailures>true</ignoreResultFailures>
+							<testResultsTimestamp>false</testResultsTimestamp>
+							<overrideRootLogLevel>DEBUG</overrideRootLogLevel>
+							<suppressJMeterOutput>false</suppressJMeterOutput>
+							<jmeterLogLevel>DEBUG</jmeterLogLevel>
+						</configuration>
 					</execution>
-				</executions> 
-			</plugin> 
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 </project>
