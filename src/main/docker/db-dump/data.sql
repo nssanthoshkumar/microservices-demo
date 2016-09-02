@@ -1,5 +1,5 @@
 create database IF NOT EXISTS testdb;
-create table testdb.t_account (ID bigint NOT NULL primary key AUTO_INCREMENT, NUMBER varchar(9),NAME varchar(50) not null, BALANCE float);
+create table testdb.t_account (ID bigint NOT NULL primary key AUTO_INCREMENT, NUMBER varchar(9),NAME varchar(50) not null, BALANCE decimal(8,2));
 ALTER TABLE testdb.t_account ALTER COLUMN BALANCE SET DEFAULT 0.0;
 insert into  testdb.t_account (NUMBER, NAME) values ('123456789', 'Keri Lee');
 insert into  testdb.t_account (NUMBER, NAME) values ('123456001', 'Dollie R. Schnidt');

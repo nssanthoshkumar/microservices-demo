@@ -15,6 +15,8 @@ services:
   accounts:
     ports:
      - "2222:2222"
+    environment:
+     - SPRING_PROFILES_ACTIVE=Test
     image: emcdevops/accounts:1.0
     depends_on:
      - registration
