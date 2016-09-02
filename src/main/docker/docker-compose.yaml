@@ -5,16 +5,16 @@ services:
    environment:
      MYSQL_ROOT_PASSWORD: password
    ports:
-     - 3306:3306
+     - 3306
    volumes:
      - ./db-dump:/docker-entrypoint-initdb.d
   registration:
     ports:
-     - "1111:1111"
+     - "1111"
     image: emcdevops/registration:1.0
   accounts:
     ports:
-     - "2222:2222"
+     - "2222"
     image: emcdevops/accounts:1.0
     depends_on:
      - registration
@@ -23,7 +23,7 @@ services:
      - mysql
   web:
     ports:
-     - "3333:3333"
+     - "3333"
     image: emcdevops/web:1.0
     depends_on:
      - registration
