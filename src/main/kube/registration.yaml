@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: registration-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: registration
+    spec:
+      containers:
+      - name: registration
+        image: emcdevops/registration:latest
+        ports:
+          - containerPort: 1111
+        imagePullPolicy: Always
