@@ -17,6 +17,7 @@ import io.pivotal.microservices.services.accounts.AccountsServer;
  * @author Paul Chapman
  *
  */
+
 @SpringBootApplication
 @Import(AccountsConfiguration.class)
 class AccountsMain {

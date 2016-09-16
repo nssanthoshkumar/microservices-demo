@@ -8,10 +8,14 @@ import java.util.logging.Logger;
 
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -25,38 +29,65 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 @ComponentScan
 @EntityScan("io.pivotal.microservices.accounts")
 @EnableJpaRepositories("io.pivotal.microservices.accounts")
-//@PropertySource("classpath:db-config.properties")
+@PropertySource("classpath:db-config.properties")
 public class AccountsConfiguration {
 
 	protected Logger logger;
+	
+	@Autowired
+    private Environment env;
+ 
 
 	public AccountsConfiguration() {
 		logger = Logger.getLogger(getClass().getName());
-	}
+	}	
 
-	/**
-	 * Creates an in-memory "rewards" database populated with test data for fast
-	 * testing
-	 */
+
 	@Bean
+	@Profile("Dev")
 	public DataSource dataSource() {
+		 logger.info("dataSource() invoked");
+
+/*		  DataSource dataSource = (new
+		  EmbeddedDatabaseBuilder()).addScript("classpath:testdb/schema.sql")
+		  .addScript("classpath:testdb/data.sql").build();*/
+		 
+
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		//dataSource.setUrl("jdbc:mysql://10.63.39.49:3307/testdb");
+		
+		dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
+		dataSource.setUrl(env.getProperty("jdbc.url"));
+		dataSource.setUsername(env.getProperty("jdbc.userName"));
+		dataSource.setPassword(env.getProperty("jdbc.password"));
+		
+		logDataSourceInfo(dataSource);
+
+		return dataSource;
+	}
+	
+	@Bean
+	@Profile("Test")
+	public DataSource testDataSource() {
 		logger.info("dataSource() invoked");
 
-		// Create an in-memory H2 relational database containing some demo
-		// accounts.
-/*		DataSource dataSource = (new EmbeddedDatabaseBuilder()).addScript("classpath:testdb/schema.sql")
-				.addScript("classpath:testdb/data.sql").build();*/
-		
-		
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://10.63.39.49:3306/testdb");
-		dataSource.setUsername("root");
-		dataSource.setPassword("password");
+		dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
+		dataSource.setUrl(env.getProperty("jdbc.test.url"));
+		dataSource.setUsername(env.getProperty("jdbc.test.userName"));
+		dataSource.setPassword(env.getProperty("jdbc.test.password"));
 		
+		logDataSourceInfo(dataSource);
 
+		return dataSource;
+	}
+	
+	public void logDataSourceInfo(DriverManagerDataSource  dataSource){
+		
 		logger.info("dataSource = " + dataSource);
-		logger.info("conected mysql container");
+		logger.info("url = "+ dataSource.getUrl());
+        logger.info("username = "+ dataSource.getUsername());
+        logger.info("password = "+dataSource.getPassword());
 
 		// Sanity check
 		JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
@@ -71,7 +102,5 @@ public class AccountsConfiguration {
 			BigDecimal balance = new BigDecimal(rand.nextInt(10000000) / 100.0).setScale(2, BigDecimal.ROUND_HALF_UP);
 			jdbcTemplate.update("UPDATE t_account SET balance = ? WHERE number = ?", balance, number);
 		}
-
-		return dataSource;
 	}
 }
