@@ -7,7 +7,7 @@ services:
    ports:
      - 3306
    volumes:
-     - ./db-dump:/docker-entrypoint-initdb.d
+     - ./dbdump:/docker-entrypoint-initdb.d
   registration:
     ports:
      - "1111"
