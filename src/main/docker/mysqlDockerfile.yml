@@ -5,4 +5,4 @@ mysql:db
    ports:
      - 3307:3306
    volumes:
-     - ./db-dump:/docker-entrypoint-initdb.d
+     - ./dbdump:/docker-entrypoint-initdb.d
